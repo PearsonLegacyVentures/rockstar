@@ -55,7 +55,7 @@
     status.classList.remove("error");
     fallback.hidden = true;
     panel.scrollTop = 0;
-    requestAnimationFrame(() => panel.focus());
+    requestAnimationFrame(() => modal.querySelector(".modal-close").focus());
   }
   function closeBooking() {
     modal.hidden = true;
