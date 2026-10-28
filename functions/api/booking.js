@@ -57,7 +57,9 @@ export async function onRequestPost({ request, env }) {
     "Custom Nassau experience"
   ]);
   const dateValue = Date.parse(data.date + "T00:00:00Z");
-  const today = new Date().toISOString().slice(0, 10);
+  const parts = new Intl.DateTimeFormat("en-US", { timeZone: "America/Nassau", year: "numeric", month: "2-digit", day: "2-digit" }).formatToParts(new Date());
+  const part = kind => parts.find(item => item.type === kind).value;
+  const today = part("year") + "-" + part("month") + "-" + part("day");
   if (!allowed.has(data.service) ||
     !/^\d{4}-\d{2}-\d{2}$/.test(data.date) ||
     !Number.isFinite(dateValue) ||
